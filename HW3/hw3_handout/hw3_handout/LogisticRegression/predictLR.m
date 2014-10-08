@@ -6,13 +6,15 @@ function y_pred = predictLR(X, theta)
 %
 %           y_pred - predicted labels using trained model.
     
+    [m, n] = size(X);
+    
+    y_pred = zeros(m,1);
     % Predict the labels for X. Our solution is ~2 lines.
     
     %% BEGIN SOLUTION    
-    [m, n] = size(X); 
+    
     onesRow = ones(1, size(X, 1));
-    X = [onesRow', X];
-    y_pred = zeros(m,1);
+    X = [onesRow', X];    
     y_pred = (sigmoid(theta' * X') >= 0.5)';
     %% END SOLUTION
 end
