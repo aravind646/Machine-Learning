@@ -1,0 +1,7 @@
+I1 = (-(42/90) * log2((42/90))) + (-(42/90) * log2((42/90))) + (-(6/90) * log2((6/90)))
+greaterThan3 = (-(42/45) * log2(42/45)) + (-(3/45) * log2(3/45))
+greaterThan3 = greaterThan3 * (1/2) * 2
+I1 - greaterThan3
+
+lessThan1 = (-(84/90) * log2(84/90))
+lessThan1 * (84/90)
