@@ -1,4 +1,4 @@
-function act = nnComputeActivations(theta, X, output_size, opt)
+function [act, a2, a3, W1, W2] = nnComputeActivations(theta, X, output_size, opt)
 %NNCOMPUTEACTIVATIONS  Compute the activations from the last layer of the
 %                     neural network.
 %
@@ -35,9 +35,12 @@ function act = nnComputeActivations(theta, X, output_size, opt)
     % NOT YET IMPLEMENTED %
 
     act = zeros(output_size, m);
-
-    %% BEGIN SOLUTION
-    
+    %% BEGIN SOLUTION        
+    z2  = X * W1' + (ones(size(X, 1),1) * b1');
+    a2  = sigmoid(z2);         
+    z3  = a2 * W2' + (ones(size(X, 1),1) * b2');
+    a3 =  sigmoid(z3);
+    act = a3';    
     %% END SOLUTION
 end
 
