@@ -50,27 +50,16 @@ function [cost, grad] = costNN(X, y, theta, opt)
     % hidden layer.
 
     cost = 0;
-%     (theta, X, output_size, opt)
-    [act, a2, a3, W1, W2] = nnComputeActivations(theta, X, output_size, opt);
-
-    % NOT YET IMPLEMENTED %
     
     %% BEGIN SOLUTION
-     cost = opt.lambda/2 * (sumsqr(W1) + sumsqr(W2)) + 1/2 * (sumsqr(act - y));    
-     
-     smallDelta3 = (act' - y') .* a3 .* (1 - a3);
-     smallDelta2 = (smallDelta3 * W2) .* a2 .* (1 -  a2);
-          
-     costBigDelta1 = smallDelta2' * X;
-     costBigDelta2 = smallDelta3' * a2;     
-     
-     W1grad = opt.lambda * W1 + costBigDelta1;
-     W2grad = opt.lambda * W2 + costBigDelta2;
-     
-     b1grad = sum(smallDelta2, 1)';
-     b2grad = sum(smallDelta3, 1)';
-%      W1grad = (opt.lambda) * W1 + 
-           
+    [act, a2, a3, W1, W2] = nnComputeActivations(theta, X, output_size, opt);
+    cost = opt.lambda/2 * (sumsqr(W1) + sumsqr(W2)) + 1/2 * (sumsqr(act - y));
+    delta3 = (act' - y') .* a3 .* (1 - a3);
+    delta2 = (delta3 * W2) .* a2 .* (1 -  a2);
+    W1grad = opt.lambda * W1 + (delta2' * X);
+    W2grad = opt.lambda * W2 + (delta3' * a2);
+    b1grad = sum(delta2, 1)';
+    b2grad = sum(delta3, 1)';
     %% END SOLUTION
     
     Wgrads{1} = W1grad;

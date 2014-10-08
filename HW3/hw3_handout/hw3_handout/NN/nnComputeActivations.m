@@ -29,13 +29,10 @@ function [act, a2, a3, W1, W2] = nnComputeActivations(theta, X, output_size, opt
     b1 = bs{1};
     b2 = bs{2};
     
-    %% Compute the activations of the output layer. Our solution is approx 
-    %  10 lines.
+    %% Compute the activations of the output layer.
     
-    % NOT YET IMPLEMENTED %
-
+    %% BEGIN SOLUTION            
     act = zeros(output_size, m);
-    %% BEGIN SOLUTION        
     z2  = X * W1' + (ones(size(X, 1),1) * b1');
     a2  = sigmoid(z2);         
     z3  = a2 * W2' + (ones(size(X, 1),1) * b2');

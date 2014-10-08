@@ -16,11 +16,9 @@ function [preds] = nnPredictClassification(X, theta, output_size, opt)
 
     %% Compute the classes of each example in X.        
     
-    %% BEGIN SOLUTION
-    
+    %% BEGIN SOLUTION    
     preds = zeros(1, size(X, 1));    
-    [M,preds] = max(probabilities);
-    
+    [M,preds] = max(probabilities);    
     %% END SOLUTION
     
 end
