@@ -3,7 +3,7 @@ function [] = runNNClassification()
 % then plots the estimated probabilities.
 
 addpath ./helpers
-load ../data/non_linear.mat
+load /data/non_linear.mat
 
 %X = [randn(100, 2);randn(100, 2) + 3.0];
 %y = [ones(100, 1); zeros(100,1)];
