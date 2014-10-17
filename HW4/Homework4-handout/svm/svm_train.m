@@ -28,10 +28,10 @@ function model = svm_train(x_train, y_train, C, kernel)
     Aeq = y_train';
     beq = 0;
     
-    %a = quadprog(H,-f,[],[],Aeq,beq, zeros(n,1), C*ones(n,1), [], optimset('Algorithm', 'interior-point-convex', 'Display', 'off'));
+    a = quadprog(H,-f,[],[],Aeq,beq, zeros(n,1), C*ones(n,1), [], optimset('Algorithm', 'interior-point-convex', 'Display', 'off'));
 
     %comment out the above line and use the following statement instead if you are using octave
-    a = qp([], H, -f, Aeq, beq, zeros(n,1), C*ones(n,1))
+    %a = qp([], H, -f, Aeq, beq, zeros(n,1), C*ones(n,1));
 
     b = 0;
     c = 0;

@@ -18,15 +18,13 @@ kernel = @(x,z) gaussian_kernel(x, z);
 model_gaussian = svm_train(x_train, y_train, C, kernel);
 pred_gaussian = svm_classify(model_gaussian, x_test);
 
-corrects = pred_gaussian == y_test;
+corrects = Y_preds == Y_test;
 accuracy = 100*mean(corrects);
-fprintf('Gaussian Accuracy: %.3f%%\n', accuracy);
+fprintf('Logistic Regression Accuracy: %.3f%%\n', accuracy);
+
+
 
 % polynomial kernel.
 kernel = @(x,z) polynomial_kernel(x, z);
 model_polynomial = svm_train(x_train, y_train, C, kernel);
 pred_polynomial = svm_classify(model_polynomial, x_test);
-corrects = pred_polynomial == y_test;
-accuracy = 100*mean(corrects);
-fprintf('Polynomial Accuracy: %.3f%%\n', accuracy);
-
