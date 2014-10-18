@@ -1,0 +1,22 @@
+function testInstanceLabel = PartitionHeldOut(size, k)
+
+numberOfOnes = floor(size/k);
+testInstanceLabel = zeros(size,1);
+current = randi([1, size], 1, numberOfOnes);
+
+n = 1;
+count = 0;
+while n <= numberOfOnes 
+    if testInstanceLabel(current(n)) ~= 1
+        testInstanceLabel(current(n)) = 1;           
+    else
+        count = count + 1;
+    end
+    n = n +1;       
+end
+
+for j = 1:size(testInstanceLabel)
+    while testInstanceLabel(i)
+end
+
+end
