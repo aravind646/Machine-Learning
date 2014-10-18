@@ -1,0 +1,18 @@
+function YcrossSetLabel = PartitionCrossSet(size,k)
+numberOfSets = floor(size/k);
+modValue = mod(size,k);
+YcrossSetLabel = zeros(size,1);
+current = randperm(size, numberOfSets);
+
+n = 1; setCount=numberOfSets;
+while n <= numberOfSets
+    for i = 1: numberOfSets
+        YcrossSetLabel(current(n)) = n;           
+    end
+    
+    current = randperm(start);    
+    YcrossSetLabel(current(n,:)) = n;           
+    start = start + numberOfSets;
+    current = 0;
+    n = n +1;       
+end

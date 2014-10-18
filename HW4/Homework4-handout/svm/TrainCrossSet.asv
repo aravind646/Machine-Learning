@@ -1,0 +1,17 @@
+function Ypredict = TrainCrossSet(Xtrain, Ytrain, crossSetLabel)
+crossSetLabel
+
+u = unique(crossSetLabel(:,1));
+[m,n] = size(u);
+Ypredict = [];
+for index = 1:m
+    value = u(index);
+    x_test = Xtrain(crossSetLabel == value,:);  
+    x_train = Xtrain(crossSetLabel ~= value,:);  
+    model = nb_train(Xtrain, Ytrain);
+    Pred_nb = nb_test(model, x_test);    
+    Ypredict = cat(1,Ypredict,Pred_nb);
+end
+
+
+end

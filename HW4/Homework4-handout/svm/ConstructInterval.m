@@ -7,11 +7,12 @@ Z = 0.0;
 if confLevel == 0.99
     Z = 2.576;
 elseif confLevel == 0.95
-        Z = 1.960;
+    Z = 1.960;
 end
+
 n = max(size(Ytest));
-t1 = ((Accuracy * (1 - Accuracy))/n);
-accuracyHypothesis = Z * (sqrt(t1));
+temp = ((Accuracy * (1 - Accuracy))/n);
+accuracyHypothesis = Z * (sqrt(temp));
 lowerInterval = Accuracy - accuracyHypothesis;
 upperInterval = Accuracy + accuracyHypothesis;
 end

@@ -4,5 +4,6 @@ function kernel = gaussian_kernel(x, z)
     % CODE BEGIN
     gamma = 1/2;
     kernel = exp(-gamma*(sumsqr(x-z)));
+    %kernel = exp(-gamma*(sum(sq(x-z))));
     % CODE END
     

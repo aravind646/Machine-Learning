@@ -16,6 +16,39 @@ kernel = @(x,z) x'*z;
 model_linear = svm_train(x_train, y_train, C, kernel);
 pred_linear = svm_classify(model_linear, x_test);
 
+
+% START Q.2.3
+C = [0, 0.1, 0.3, 0.5, 1, 2, 5, 8, 10];
+% model_linear = svm_train(x_combined, y_combined, C, kernel);
+crossSetLabel = PartitionCrossSet(200, 4);
+u = unique(crossSetLabel(:,1));
+[m,n] = size(u);
+[mc, nc] = size(C);
+for cIndex = 1:nc
+    Ypredict = zeros(size(y_combined));
+    train_error = 0;
+    for index = 1:m
+        value = u(index);
+        x_test = x_combined(crossSetLabel == value,:);  
+        x_train = x_combined(crossSetLabel ~= value,:);  
+        y_train = y_combined(crossSetLabel ~= value,:);  
+        model_linear = svm_train(x_train, y_train, C(cIndex), kernel);    
+        Ypredict(crossSetLabel == value,:) = svm_classify(model_linear, x_test);    
+        y_train_pred= svm_classify(model_linear, x_train);
+        train_error = train_error + mean(y_train_pred ~= y_train);
+    end
+    mean_train_error = train_error/m;
+    corrects = Ypredict ~= y_combined;
+    test_error = mean(corrects);
+    fprintf('C: %.5f', C(cIndex));
+    fprintf('\tTrain Error: %.20f',  mean_train_error);
+    fprintf('\tTest Error: %.20f \n',  test_error);    
+    cIndex= cIndex +1;
+end
+
+
+% END Q.2. 
+
 % START Q.2nd 
 %model = nb_train(x_train_combined, y_train_combined);
 %Ypredict = nb_test(model, x_test_combined);
