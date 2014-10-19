@@ -24,7 +24,7 @@ crossSetLabel = PartitionCrossSet(200, 4);
 u = unique(crossSetLabel(:,1));
 [m,n] = size(u);
 [mc, nc] = size(C);
-for cIndex = 1:nc
+for cIndex = 1:1
     Ypredict = zeros(size(y_combined));
     train_error = 0;
     for index = 1:m
@@ -40,9 +40,9 @@ for cIndex = 1:nc
     mean_train_error = train_error/m;
     corrects = Ypredict ~= y_combined;
     test_error = mean(corrects);
-    fprintf('C: %.5f', C(cIndex));
-    fprintf('\tTrain Error: %.20f',  mean_train_error);
-    fprintf('\tTest Error: %.20f \n',  test_error);    
+    fprintf('%.2f', C(cIndex));
+    fprintf('\t%.5f',  mean_train_error);
+    fprintf('\t%.5f \n',  test_error);    
     cIndex= cIndex +1;
 end
 
@@ -64,8 +64,9 @@ y_test_combined = y_combined(testInstanceLabel == 0,:);
 
 pred_linear = svm_classify(model_linear, x_test_combined);
 [a, l, h] = ConstructInterval(pred_linear, y_test_combined, .95)
-%[a, l, h] = ConstructInterval(pred_linear, y_combined, .99)
+[a, l, h] = ConstructInterval(pred_linear, y_test_combined, .99)
 
+k11 =111
 testInstanceLabel = PartitionHeldOut(200, 10); 
 x_train_combined = x_combined(testInstanceLabel == 1,:);
 y_train_combined = y_combined(testInstanceLabel == 1,:);
@@ -73,6 +74,7 @@ x_test_combined = x_combined(testInstanceLabel == 0,:);
 y_test_combined = y_combined(testInstanceLabel == 0,:);
 
 pred_linear = svm_classify(model_linear, x_test_combined);
+[a, l, h] = ConstructInterval(pred_linear, y_test_combined, .95)
 [a, l, h] = ConstructInterval(pred_linear, y_test_combined, .99)
 
 
@@ -84,7 +86,7 @@ pred_gaussian = svm_classify(model_gaussian, x_test);
 
 
 % polynomial kernel.
-kernel = @(x,z) polynomial_kernel(x, z);
+kernel = @(x,z) polynomial_kernel(x, z)
 model_polynomial = svm_train(x_train, y_train, C, kernel);
 pred_polynomial = svm_classify(model_polynomial, x_test);
-%[a, l, h] = ConstructInterval(pred_polynomial, y_test, 99);
+[a, l, h] = ConstructInterval(pred_polynomial, y_test, 99);

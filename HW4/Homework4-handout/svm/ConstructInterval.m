@@ -15,4 +15,5 @@ temp = ((Accuracy * (1 - Accuracy))/n);
 accuracyHypothesis = Z * (sqrt(temp));
 lowerInterval = Accuracy - accuracyHypothesis;
 upperInterval = Accuracy + accuracyHypothesis;
+
 end
